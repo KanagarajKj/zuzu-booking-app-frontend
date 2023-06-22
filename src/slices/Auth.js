@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { setLogDetails } from './RegistrationData';
+import toast, { Toaster } from 'react-hot-toast';
 
 const initialState = {
   token: '',
@@ -84,11 +85,11 @@ export const getAuth = () => {
           })
         );
       } else {
+        toast.error('Fetch User Details Failed');
         dispatch(setLoaded({ isLoaded: true }));
       }
     } catch (error) {
-      console.log(error, 'eeeee');
-      dispatch(setLoaded({ isLoaded: true }));
+      toast.error('Network Error Logout and Login Again');
       return;
     }
   };
@@ -104,16 +105,14 @@ export const getLogDetails = () => {
           .get(BACKEND_URL + '/get-log-details', config)
           .then((res) => dispatch(setLogDetails(res?.data?.data)));
       } else {
-        dispatch(setLoaded({ isLoaded: true }));
+        toast.error('Fetch Log Details Failed');
       }
     } catch (error) {
-      dispatch(setLoaded({ isLoaded: true }));
+      toast.error('Network Error Logout and Login Again');
       return;
     }
   };
 };
-
-
 
 export const { setUser, removeUser, setLoaded, setHeader } = authSlice.actions;
 

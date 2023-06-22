@@ -3,21 +3,19 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { setToken } from '@component/slices/Auth';
-import { useDispatch } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
   const router = useRouter();
   const emailRegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   const BACKEND_URL = 'http://localhost:3003';
-  const dispatch = useDispatch();
 
   const logInUser = (data) => {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await axios.post(BACKEND_URL + '/log-in', data);
         if (response.status === 200) {
-          const { token, refreshToken } = response.data;
+          const { token } = response.data;
           toast.success('Login Successfully');
           setToken(token);
           resolve({ token });
@@ -26,7 +24,6 @@ const Login = () => {
           toast.error('Try Again Later');
         }
       } catch (error) {
-        console.log(error,'111')
         toast.error(error?.response?.data?.errors?.body[0]);
       }
     });
@@ -34,7 +31,6 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
