@@ -58,7 +58,7 @@ const SignIn = () => {
   const signUpUser = (data) => {
     return new Promise(async (resolve, reject) => {
       try {
-        if (data.password !== data.confirmPassword) {
+        if (data.password === data.confirmPassword) {
           setError('confirmPassword', {
             message: 'Password is not Matching!',
             type: 'custom',
