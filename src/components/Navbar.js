@@ -48,19 +48,23 @@ const Navbar = () => {
   }, [openUserDetail]);
 
   const signOut = async () => {
-    const token = checkUser();
-    if (token) {
-      const config = { headers: { Authorization: `Bearer ${token}` } };
-      const response = await axios.get(BACKEND_URL + '/log-out', config);
-      if (response.status === 200) {
-        removeToken();
-        setmodalOpen(false);
-        toast.success('Logout Successfully');
-        router.push('/login');
-      }
-    } else {
-      toast.error('Unable to logout');
-    }
+    // const token = checkUser();
+    // if (token) {
+    //   const config = { headers: { Authorization: `Bearer ${token}` } };
+    //   const response = await axios.get(BACKEND_URL + '/log-out', config);
+    //   if (response.status === 200) {
+    //     removeToken();
+    //     setmodalOpen(false);
+    //     toast.success('Logout Successfully');
+    //     router.push('/login');
+    //   }
+    // } else {
+    //   toast.error('Unable to logout');
+    // }
+    removeToken();
+    setmodalOpen(false);
+    toast.success('Logout Successfully');
+    router.push('/login');
   };
 
   return (

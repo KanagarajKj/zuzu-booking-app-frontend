@@ -15,29 +15,29 @@ const index = () => {
     const token = checkUser();
     if (token) {
       dispatch(getAuth());
-      dispatch(getLogDetails());
     } else {
       router.push('/signin');
     }
+  }, []);
 
+  useEffect(() => {
+    const token = checkUser();
     if (
-      token &&
-      user?.typeOfPerson === 'admin' &&
-      user?.isPhoneNumberVerified
-    ) {
-      router.push('/admin-page');
-    } else if (
       token &&
       user?.typeOfPerson === 'admin' &&
       !user?.isPhoneNumberVerified
     ) {
       router.push('/verification-page');
-    }
-
-    if (token && user?.typeOfPerson === 'user' && user?.isPhoneNumberVerified) {
+    } else if (
+      token &&
+      user?.typeOfPerson === 'admin' &&
+      user?.isPhoneNumberVerified
+    ) {
       router.push('/admin-page');
+    } else {
+      router.push('/');
     }
-  }, [user]);
+  }, [user?.typeOfPerson, user?.isPhoneNumberVerified]);
 
   return (
     <>

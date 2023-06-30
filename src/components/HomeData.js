@@ -34,6 +34,18 @@ const HomeData = () => {
       <div className="m-auto text-center">
         <QRCode value={credentials} viewBox={`0 0 256 256`} />
       </div>
+      {/* <div>
+        <button
+          onClick={() =>
+            router.push(
+              `/qr-page?token=${userToken}&typeOfPerson=${auth?.typeOfPerson}`
+            )
+          }
+          className="text-white bg-orange-700 hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Open Next Tab
+        </button>
+      </div> */}
       {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-4 ">
         {restaurantsData?.length > 0 &&
           restaurantsData?.map((restaurant) => {

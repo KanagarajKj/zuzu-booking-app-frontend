@@ -15,15 +15,26 @@ const index = () => {
     const token = checkUser();
     if (token) {
       dispatch(getAuth());
-      dispatch(getLogDetails());
     } else {
       router.push('/signin');
     }
+  }, []);
 
-    if (token && user?.typeOfPerson === 'admin') {
+  useEffect(() => {
+    const token = checkUser();
+
+    if (token && user?.typeOfPerson === 'user' && user?.isPhoneNumberVerified) {
+      router.push('/');
+    } else if (
+      token &&
+      user?.typeOfPerson === 'user' &&
+      !user?.isPhoneNumberVerified
+    ) {
+      router.push('/verification-page');
+    } else {
       router.push('/admin-page');
     }
-  }, [user]);
+  }, [user?.typeOfPerson, user?.isPhoneNumberVerified]);
 
   return (
     <>
