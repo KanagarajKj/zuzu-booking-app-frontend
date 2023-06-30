@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiTwotoneStar } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
+import QRCode from 'react-qr-code';
+import { checkUser } from '@component/slices/Auth';
 
 const HomeData = () => {
   const router = useRouter();
   const restaurantsData = useSelector(
     (state) => state.registration.restaurantData
   );
+  const auth = useSelector((state) => state.auth);
+  const [userToken, setUserToken] = useState('');
+
+  useEffect(() => {
+    const token = checkUser();
+    if (token) {
+      setUserToken(token);
+    }
+  }, []);
+
+  const credentials = `http://localhost:3000/qr-page?token=${userToken}&typeOfPerson=${auth?.typeOfPerson}`;
 
   return (
-    <div className="p-8 md:mt-24 mt-0">
+    <div className="p-8 md:mt-24 mt-0 text-center m-auto">
       <div className="text-4xl font-semibold italic text-orange-600 text-center my-6">
-        <h1>Restaurants</h1>
+        {auth?.typeOfPerson === 'admin' ? (
+          <h1>Admin Home Page</h1>
+        ) : (
+          <h1>User Home Page</h1>
+        )}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-4 ">
+      <div className="m-auto text-center">
+        <QRCode value={credentials} viewBox={`0 0 256 256`} />
+      </div>
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-4 ">
         {restaurantsData?.length > 0 &&
           restaurantsData?.map((restaurant) => {
             return (
@@ -59,7 +79,7 @@ const HomeData = () => {
               </div>
             );
           })}
-      </div>
+      </div> */}
     </div>
   );
 };

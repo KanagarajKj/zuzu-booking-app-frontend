@@ -20,21 +20,7 @@ const index = () => {
       router.push('/signin');
     }
 
-    if (
-      token &&
-      user?.typeOfPerson === 'admin' &&
-      user?.isPhoneNumberVerified
-    ) {
-      router.push('/admin-page');
-    } else if (
-      token &&
-      user?.typeOfPerson === 'admin' &&
-      !user?.isPhoneNumberVerified
-    ) {
-      router.push('/verification-page');
-    }
-
-    if (token && user?.typeOfPerson === 'user' && user?.isPhoneNumberVerified) {
+    if (token && user?.typeOfPerson === 'admin') {
       router.push('/admin-page');
     }
   }, [user]);

@@ -9,7 +9,8 @@ const initialState = {
   email: '',
   phone: '',
   isLoaded: false,
-  isLoggedIn: false,
+  isPhoneNumberVerified: false,
+  typeOfPerson: '',
   header: {},
 };
 
@@ -24,6 +25,8 @@ const authSlice = createSlice({
       state.fullName = action.payload.fullName;
       state.email = action.payload.email;
       state.phone = action.payload.phone;
+      state.typeOfPerson = action.payload.typeOfPerson;
+      state.isPhoneNumberVerified = action.payload.isPhoneNumberVerified;
       state.isLoaded = true;
       state.header = {
         headers: { Authorization: `Bearer ${action.payload.token}` },
@@ -82,6 +85,8 @@ export const getAuth = () => {
             fullName: data.data.fullName,
             email: data.data.email,
             phone: data.data.phone,
+            isPhoneNumberVerified: data.data.isPhoneNumberVerified,
+            typeOfPerson: data.data.typeOfPerson,
           })
         );
       } else {

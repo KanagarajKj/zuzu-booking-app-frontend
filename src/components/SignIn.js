@@ -25,6 +25,7 @@ const SignIn = () => {
       .string()
       .required('Phone Number is Required')
       .matches(phoneRegExp, 'Enter Valid Phone Number'),
+    typeOfPerson: yup.string().required("Type Of Person is Required"),
     password: yup
       .string()
       .required('Enter Your Password')
@@ -36,6 +37,7 @@ const SignIn = () => {
       .min(6, 'Password Should Minimum 6 Characters')
       .max(32, 'Password Should Maximum 12 Characters'),
   });
+
   const {
     register,
     handleSubmit,
@@ -47,6 +49,7 @@ const SignIn = () => {
       fullName: '',
       email: '',
       phone: '',
+      typeOfPerson: '',
       password: '',
       confirmPassword: '',
     },
@@ -58,7 +61,7 @@ const SignIn = () => {
   const signUpUser = (data) => {
     return new Promise(async (resolve, reject) => {
       try {
-        if (data.password === data.confirmPassword) {
+        if (data.password !== data.confirmPassword) {
           setError('confirmPassword', {
             message: 'Password is not Matching!',
             type: 'custom',
@@ -187,6 +190,33 @@ const SignIn = () => {
               {errors.phone && (
                 <small className="absolute text-xs text-red-500 left-0 md:-bottom-1 -bottom-4 md:top-20">
                   {errors.phone.message}
+                </small>
+              )}
+            </div>
+            <div className="mb-6 relative">
+              <label
+                for="typeOfPerson"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Type Of Person
+              </label>
+              <select
+                {...register('typeOfPerson', {
+                  required: 'Type Of Person is Required',
+                })}
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                name="typeOfPerson"
+                id="typeOfPerson"
+              >
+                <option value="" disabled>
+                  Select Type Of Person
+                </option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </select>
+              {errors.typeOfPerson && (
+                <small className="absolute text-xs text-red-500 left-0 md:-bottom-1 -bottom-4 md:top-20">
+                  {errors.typeOfPerson.message}
                 </small>
               )}
             </div>
