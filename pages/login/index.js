@@ -5,11 +5,6 @@ const index = () => {
   return (
     <div >
       <Login />
-      <div className='text-center'>
-        <h3 className="text-yellow-400 font-semibold text-4xl tracking-wide italic mt-20">
-          ZUZU
-        </h3>
-      </div>
     </div>
   );
 }

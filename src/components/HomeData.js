@@ -20,7 +20,7 @@ const HomeData = () => {
     }
   }, []);
 
-  const credentials = `http://localhost:3000/qr-page?token=${userToken}&typeOfPerson=${auth?.typeOfPerson}`;
+  const credentials = `/qr-page?userEmail=${auth?.email}&userPassword=${auth?.password}&typeOfPerson=${auth?.typeOfPerson}`;
 
   return (
     <div className="p-8 md:mt-24 mt-0 text-center m-auto">

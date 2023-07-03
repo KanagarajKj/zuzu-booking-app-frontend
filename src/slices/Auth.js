@@ -11,6 +11,7 @@ const initialState = {
   isLoaded: false,
   isPhoneNumberVerified: false,
   typeOfPerson: '',
+  password:"",
   header: {},
 };
 
@@ -26,6 +27,7 @@ const authSlice = createSlice({
       state.email = action.payload.email;
       state.phone = action.payload.phone;
       state.typeOfPerson = action.payload.typeOfPerson;
+      state.password = action.payload.password;
       state.isPhoneNumberVerified = action.payload.isPhoneNumberVerified;
       state.isLoaded = true;
       state.header = {
@@ -39,6 +41,7 @@ const authSlice = createSlice({
       state.email = '';
       state.phone = '';
       state.isLoggedIn = false;
+      password='',
       state.header = {};
     },
     setLoaded: (state, action) => {
@@ -87,6 +90,7 @@ export const getAuth = () => {
             phone: data.data.phone,
             isPhoneNumberVerified: data.data.isPhoneNumberVerified,
             typeOfPerson: data.data.typeOfPerson,
+            password:data.data.hash,
           })
         );
       } else {

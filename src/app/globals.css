@@ -10,7 +10,30 @@ body {
   height: 100%;
 }
 
-
+/* 
 ::-webkit-scrollbar {
   display: none;
+} */
+
+#reader {
+  margin: 0 auto;
+  width: 300px;
+  height: 300px;
+  border: 2px solid #333;
+  border-radius: 5px;
+}
+
+/* #reader canvas {
+  display: block;
+  margin: 0 auto;
+  border-radius: 5px;
+} */
+
+/* Customize the QR code scanner result area */
+#scan-result {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  text-align: center;
 }
